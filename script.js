@@ -30,8 +30,6 @@ let getComputerChoice = () => {
 
 //Play a single round of Rock, Paper Scissors
 let playRound = (computer, player) => {
-  //Change to title case
-  player = player.slice(0, 1).toUpperCase() + player.slice(1).toLowerCase();
   if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
     // return "You Win";
     console.log("win");
@@ -41,9 +39,6 @@ let playRound = (computer, player) => {
   } else if (computer === player) {
     // return "Tie";
     console.log("tie");
-  } else {
-    // return `Not a possible outcome.`;
-    console.log("n/a");
   }
 };
 
