@@ -4,6 +4,11 @@ const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const gameButtons = Array.from(document.querySelectorAll("button"));
 
+//Set Variables for results
+const player = document.querySelector(".player");
+const computer = document.querySelector(".computer");
+const finalScore = document.querySelector(".final");
+
 //Add an event listener that calls playRound with the clicked button
 gameButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -31,14 +36,11 @@ let getComputerChoice = () => {
 //Play a single round of Rock, Paper Scissors
 let playRound = (computer, player) => {
   if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
-    // return "You Win";
-    console.log("win");
+    return "You Win";
   } else if ((computer === "Rock" && player === "Scissors") || (computer === "Paper" && player === "Rock") || (computer === "Scissors" && player === "Paper")) {
-    // return "Computer Wins";
-    console.log("lose");
+    return "Computer Wins";
   } else if (computer === player) {
-    // return "Tie";
-    console.log("tie");
+    return "Tie";
   }
 };
 
@@ -47,21 +49,21 @@ let playGame = () => {
   playerScore = 0;
   computerScore = 0;
 
-  // for (let i = 0; i < 5; i++) {
-  let outcome = playRound();
-  switch (outcome) {
-    case "You Win":
-      playerScore++;
-      break;
-    case "Computer Wins":
-      computerScore++;
-      break;
-    case "Tie":
-      break;
-    default:
-      return "Error!";
+  for (let i = 0; i < 5; i++) {
+    let outcome = playRound();
+    switch (outcome) {
+      case "You Win":
+        playerScore++;
+        break;
+      case "Computer Wins":
+        computerScore++;
+        break;
+      case "Tie":
+        break;
+      default:
+        return "Error!";
+    }
   }
-  // }
 };
 
 let whoWon = (player, computer) => {
