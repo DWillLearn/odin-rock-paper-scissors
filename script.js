@@ -4,19 +4,7 @@ const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const gameButtons = Array.from(document.querySelectorAll("button"));
 
-//Set Variables for results
-const player = document.querySelector(".player");
-const computer = document.querySelector(".computer");
-const finalScore = document.querySelector(".final");
-
-//Add an event listener that calls playRound with the clicked button
-gameButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    playRound((computer = getComputerChoice()), button.textContent);
-  });
-});
-
-//Randomly return "Rock", "Paper", or "Scissors"
+//Randomly return "Rock", "Paper", or "Scissors" for computer turn
 //Make the item returned based on a random number between 1 and 3 and rounded to the nearest whole number
 let getComputerChoice = () => {
   let getItem = Math.floor(Math.random() * 3 + 1);
@@ -33,6 +21,13 @@ let getComputerChoice = () => {
   }
 };
 
+//Add an event listener that uses button's text and random computer choice as args for playRound
+gameButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    playRound((computer = getComputerChoice()), button.textContent);
+  });
+});
+
 //Play a single round of Rock, Paper Scissors
 let playRound = (computer, player) => {
   if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
@@ -44,10 +39,15 @@ let playRound = (computer, player) => {
   }
 };
 
-// //Play game 5 times and tell function who wins
-let playGame = () => {
-  playerScore = 0;
-  computerScore = 0;
+//Set variables for results
+const playerScore = document.querySelector(".player");
+const computerScore = document.querySelector(".computer");
+const finalScore = document.querySelector(".final");
+
+// //Play game 5 times and tell function who wins (Figure out how that correlates to buttons)
+let playGamePrompt = () => {
+  playerCount = 0;
+  computerCount = 0;
 
   for (let i = 0; i < 5; i++) {
     let outcome = playRound();
