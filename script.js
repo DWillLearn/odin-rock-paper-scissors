@@ -19,17 +19,9 @@ let getComputerChoice = () => {
 let playRound = (computer = getComputerChoice(), player = prompt("Choose item!")) => {
   //Change to title case
   player = player.slice(0, 1).toUpperCase() + player.slice(1).toLowerCase();
-  if (
-    (computer === "Rock" && player === "Paper") ||
-    (computer === "Paper" && player === "Scissors") ||
-    (computer === "Scissors" && player === "Rock")
-  ) {
+  if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
     return "You Win";
-  } else if (
-    (computer === "Rock" && player === "Scissors") ||
-    (computer === "Paper" && player === "Rock") ||
-    (computer === "Scissors" && player === "Paper")
-  ) {
+  } else if ((computer === "Rock" && player === "Scissors") || (computer === "Paper" && player === "Rock") || (computer === "Scissors" && player === "Paper")) {
     return "Computer Wins";
   } else if (computer === player) {
     return "Tie";
@@ -43,21 +35,21 @@ let playGame = () => {
   playerScore = 0;
   computerScore = 0;
 
-  for (let i = 0; i < 5; i++) {
-    let outcome = playRound();
-    switch (outcome) {
-      case "You Win":
-        playerScore++;
-        break;
-      case "Computer Wins":
-        computerScore++;
-        break;
-      case "Tie":
-        break;
-      default:
-        return "Error!";
-    }
+  // for (let i = 0; i < 5; i++) {
+  let outcome = playRound();
+  switch (outcome) {
+    case "You Win":
+      playerScore++;
+      break;
+    case "Computer Wins":
+      computerScore++;
+      break;
+    case "Tie":
+      break;
+    default:
+      return "Error!";
   }
+  // }
 };
 
 let whoWon = (player, computer) => {
