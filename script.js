@@ -1,3 +1,7 @@
+//Set variables for game buttons
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
 //Randomly return "Rock", "Paper", or "Scissors"
 //Make the item returned based on a random number between 1 and 3 and rounded to the nearest whole number
 let getComputerChoice = () => {
