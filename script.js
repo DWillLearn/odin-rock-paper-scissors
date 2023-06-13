@@ -28,10 +28,13 @@ gameButtons.forEach((button) => {
   });
 });
 
+//Show what each player did
+
 //Set variables for results
 const playerScore = document.querySelector(".player");
 const computerScore = document.querySelector(".computer");
-const finalScore = document.querySelector(".final");
+const finalScore = document.createElement("p");
+finalScore.classList.add("final");
 
 //Set initial scores
 let playerCount = 0;
