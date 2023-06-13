@@ -27,56 +27,54 @@ let getComputerChoice = () => {
   }
 };
 
-//Show what each player did
-const showPlay = () => {};
-
 //Set initial scores
+const scoreContainer = document.querySelector(".scores");
 const playerScore = document.querySelector(".player");
 const computerScore = document.querySelector(".computer");
 let playerCount = 0;
 let computerCount = 0;
 
+//Make element that shows score text
+let scoreText = document.createElement("p");
+scoreText.classList.add("score-text");
+
 //Play a single round of Rock, Paper Scissors and keep running score
 let playRound = (computer, player) => {
+  scoreContainer.appendChild(scoreText);
   if (playerCount < 5 && computerCount < 5) {
     if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
       playerCount++;
       playerScore.textContent = `Player: ${playerCount}`;
+      scoreText.textContent = `Player's ${player} vs. Computer's ${computer}! Player +1`;
     } else if ((computer === "Rock" && player === "Scissors") || (computer === "Paper" && player === "Rock") || (computer === "Scissors" && player === "Paper")) {
       computerCount++;
       computerScore.textContent = `Computer: ${computerCount}`;
+      scoreText.textContent = `Computer's ${computer} vs. Player's ${player}! Computer +1`;
+    } else {
+      scoreText.textContent = `Computer's ${computer} ties with Player's ${player}! +0`;
     }
     keepCount();
   }
 };
 
-//Keep score until someone reaches 5  and send scores to whoWon
+//Keep score until someone reaches 5 and send scores to whoWon
 let keepCount = () => {
   if (playerCount === 5 || computerCount === 5) {
     whoWon(playerCount, computerCount);
   }
 };
 
-//Make final score container
-const scoreContainer = document.querySelector(".scores");
-const finalScore = document.createElement("p");
-finalScore.classList.add("final");
-
 //Announce winner
 let whoWon = (player, computer) => {
-  if (!scoreContainer.querySelector(".final")) {
-    scoreContainer.appendChild(finalScore);
-    //Show who won
-    if (player > computer) {
-      finalScore.textContent = "You Win!";
-    } else if (player < computer) {
-      finalScore.textContent = "Computer Wins!";
-    }
-    resetScore();
+  if (player > computer) {
+    scoreText.textContent = "You Win!";
+  } else if (player < computer) {
+    scoreText.textContent = "Computer Wins!";
   }
+  resetScore();
 };
 
-//Add a reset button
+//Reset final score
 const resetScore = () => {
   //Create and append reset button
   let gameContainer = document.querySelector(".game");
@@ -87,14 +85,13 @@ const resetScore = () => {
     gameContainer.appendChild(resetButton);
   }
 
-  //Reset scores on button click
+  //Reset scores and remove final scores and reset button on click
   resetButton.addEventListener("click", () => {
     playerCount = 0;
     playerScore.textContent = `Player: ${playerCount}`;
     computerCount = 0;
     computerScore.textContent = `Computer: ${computerCount}`;
-    //Remove winner
-    scoreContainer.removeChild(finalScore);
+    scoreContainer.removeChild(scoreText);
     gameContainer.removeChild(resetButton);
   });
 };
