@@ -28,52 +28,41 @@ gameButtons.forEach((button) => {
   });
 });
 
-//Play a single round of Rock, Paper Scissors
-let playRound = (computer, player) => {
-  if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
-    return "You Win";
-  } else if ((computer === "Rock" && player === "Scissors") || (computer === "Paper" && player === "Rock") || (computer === "Scissors" && player === "Paper")) {
-    return "Computer Wins";
-  } else if (computer === player) {
-    return "Tie";
-  }
-};
-
 //Set variables for results
 const playerScore = document.querySelector(".player");
 const computerScore = document.querySelector(".computer");
 const finalScore = document.querySelector(".final");
 
-// //Play game 5 times and tell function who wins (Figure out how that correlates to buttons)
-let playGamePrompt = () => {
-  playerCount = 0;
-  computerCount = 0;
+//Set initial scores
+let playerCount = 0;
+let computerCount = 0;
 
-  for (let i = 0; i < 5; i++) {
-    let outcome = playRound();
-    switch (outcome) {
-      case "You Win":
-        playerScore++;
-        break;
-      case "Computer Wins":
-        computerScore++;
-        break;
-      case "Tie":
-        break;
-      default:
-        return "Error!";
-    }
+//Play a single round of Rock, Paper Scissors
+let playRound = (computer, player) => {
+  if ((computer === "Rock" && player === "Paper") || (computer === "Paper" && player === "Scissors") || (computer === "Scissors" && player === "Rock")) {
+    playerCount++;
+    playerScore.textContent = `Player: ${playerCount}`;
+  } else if ((computer === "Rock" && player === "Scissors") || (computer === "Paper" && player === "Rock") || (computer === "Scissors" && player === "Paper")) {
+    computerCount++;
+    computerScore.textContent = `Computer: ${computerCount}`;
+  }
+  keepCount();
+};
+
+//Keep score until someone reaches 5  and send scores to whoWon
+let keepCount = () => {
+  if (playerCount === 5 || computerCount === 5) {
+    whoWon(playerCount, computerCount);
   }
 };
 
+//Announce winner
 let whoWon = (player, computer) => {
   if (player > computer) {
-    return "You Win!";
+    finalScore.textContent = "You Win!";
   } else if (player < computer) {
-    return "Computer Wins!";
+    finalScore.textContent = "Computer Wins!";
   } else if (player === computer) {
-    return "It's a Tie!";
-  } else {
-    return "Error!";
+    finalScore.textContent = "It's a Tie!";
   }
 };
